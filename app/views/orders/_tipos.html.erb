@@ -1,0 +1,82 @@
+<style>
+.submit input {
+  width: 50%;
+  height: 100%;
+  padding: 10px 10px;
+  background: #201C3D;
+  color: #fff;
+  display: block;
+  border: none;
+  margin-top: 20px;
+  left: 0;
+  bottom: 0;;
+  border-bottom-width: 7px;
+  font-size:20px;
+}
+
+</style> 
+
+<center>
+      <table width="1213" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+      <tr>
+      </tr>
+      <th width="155" scope="col">&nbsp;</th>
+      <th width="155" scope="col">&nbsp;</th>
+      <th width="155" scope="col">&nbsp;</th>
+        <tr>
+          <td width="190" scope="col">&nbsp;</td>
+          <td width="934" scope="col">
+                    
+          <div class="row no-gutter">
+          <center><h1>Sabor Sandwich Tamaño (<%= @sizeSelected %> cm)</h1></center>
+              <br><br>
+              <% if @sizeSelected=='15'
+              tiposSan = Ingredient.where(category_id: '2')
+            else                
+              tiposSan = Ingredient.where(category_id: '3')
+            end 
+               %>
+              <%= form_tag :action => 'PrimeraEtapa' do %>
+              <% tiposSan.each do |ingredient| %>
+                  <div class="col-md-2">
+                  <% tipo = ingredient.name_Ingredient.split("_") %>
+              <center><h3 id="sabor_<%=ingredient.id %>"><%= tipo[0] %></h3><br>
+              
+                <img src="<%= ingredient.imageno.url%>" id="<%=ingredient.id %>" name="sabor_<%=tipo[1] %>" class="seleccionados_<%= tipo[1]%>"/><br>
+                  <input type="radio" name="myform[tipo]" id="myform_tipo_<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados" ><br><br></center><br>
+                   </div>
+              <% end %>
+    <center>
+    <div class="submit">
+    <%= submit_tag "Continuar" %>
+    </div></center>
+  
+  <% end %>
+              
+
+          </div>
+
+
+          </td>
+          <th width="89">&nbsp;</th>
+        </tr>
+        
+      </tbody>
+    </table>
+    </center>
+
+
+
+    </td>
+    <td width="89">&nbsp;</td>
+  </tr>
+  <tr> <td width="155" scope="col">&nbsp;</td></tr>
+  <tr> <td width="155" scope="col">&nbsp;</td></tr>
+</tbody>
+</table>
+</td> 
+</tr>
+</tbody>
+</table>
+

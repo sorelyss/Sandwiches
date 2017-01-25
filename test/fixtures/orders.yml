@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  created_at: 2016-09-30
+  hour: 
+  comments: MyText
+  user: one
+  quantity: 1
+  total: 1
+
+two:
+  created_at: 2016-09-30
+  hour: 
+  comments: MyText
+  user: two
+  quantity: 1
+  total: 1

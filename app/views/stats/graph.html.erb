@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8" />
+  <meta name="ROBOTS" content="NOODP" />
+  <meta name="viewport" content="initial-scale=1" />
+  <title><%= content_for(:title) %> | <%= Rails.application.class.parent_name.titlecase %></title>
+  <% Administrate::Engine.stylesheets.each do |css_path| %>
+    <%= stylesheet_link_tag css_path %>
+  <% end %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= csrf_meta_tags %>
+<style>
+  button {background-color: #FFFFFF;}
+</style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <div class="sidebar">
+      <ul class="sidebar__list">
+        <th width="159" rowspan="3" scope="row" valign="top"><%= link_to image_tag("dunord.png", :width=>"130", :height=>"150", :alt=>""), root_path %></th>
+          <br>
+          <br>
+          <%= link_to 'Users', "/admin/users" %>
+          <br>
+          <br>
+          <%= link_to 'Categories', "admin/categories" %>
+          <br>
+          <br>
+          <%= link_to 'Ingredients', "/admin/ingredients" %>
+          <br>
+          <br>
+          <%= link_to 'Order', "/admin/orders" %>
+          <br>
+          <br>
+          <%= link_to 'Order Details', "admin/order_details" %>
+          <br>
+          <br>
+          <%= link_to 'Estadisticas', "/stats" %>
+        </ul>
+    </div>
+
+    <main class="main-content" role="main">
+      
+      <div class="container">
+        <br>
+        <h2>Mas populares:</h2>
+        <p>En esta tabla se muestran los elementos mas populares por categoría</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th>Elemento mas popular</th>
+              <th>Numero de elementos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% Category.all.each do |cat| %>
+                <tr>
+                  <td><%=cat.name_Category%></td>
+
+                  <td><%=nombre=Ingredient.select("name_Ingredient").where("id = (SELECT ingredient_id FROM (SELECT name_Ingredient, ingredient_id FROM ingredients, order_details where ingredients.id=ingredient_id AND category_id = #{cat.id}) as alias group by ingredient_id order by count(*) desc limit 1)").pluck(:name_Ingredient)[0]%></td>
+                  <td><%=numero = Ingredient.select("(name_Ingredient)").from("ingredients, order_details").where("ingredients.id=order_details.ingredient_id AND category_id = #{cat.id}").count%></td>
+                  
+                </tr>
+            <% end %>
+            <tr>
+              <td></td>
+              <th>Total:</th>
+              
+              <td><%=OrderDetail.count%></td>
+            <tr>
+            
+          </tbody>
+        </table>
+        <div>
+          <br>
+          <h3>Grafico total</h3>
+          <br>
+          <%= column_chart OrderDetail.select("name_Ingredient").from("order_details, ingredients").where("order_details.ingredient_id=ingredients.id").group("name_Ingredient").count, colors: ["#00004d"] %>
+          <h4>Graficos parciales</h4>
+          <% Category.all.each do |cat| %>
+          <%if cat.id > 1 %>
+            <%=cat.name_Category %>
+            <br>
+            <%= pie_chart OrderDetail.select("name_Ingredient").from("order_details, ingredients").where("order_details.ingredient_id=ingredients.id AND ingredients.category_id =#{cat.id}").group("name_Ingredient").count %>
+          <% end %>
+          <% end %>
+        <div>
+      </div>
+      
+    </main>
+
+
+  </div>
+
+  
+  <center>
+        <table width="1213" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <th width="155" scope="col">&nbsp;</th>
+        <th width="155" scope="col">&nbsp;</th>
+        <th width="155" scope="col">&nbsp;</th>
+          <tr>
+            <th width="190" scope="col">&nbsp;</th>
+            <th width="900" scope="col"><%= image_tag "end.jpg", :width=>"900", :height=>"100", :alt=>""%></th>
+            <th width="89">&nbsp;</th>
+          </tr>
+</body>
+</html>

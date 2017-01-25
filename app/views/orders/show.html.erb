@@ -1,0 +1,37 @@
+<center>
+<br> <br>
+<h2 id="notice"><%= notice %></h2>
+
+<h3>
+  <strong>Created at:</strong>
+  <%= @order.created_at %>
+</h3>
+
+<h3>
+  <strong>Hour:</strong>
+  <%= @order.hour %>
+</h3>
+
+<h3>
+  <strong>Comments:</strong>
+  <%= @order.comments %>
+</h3>
+
+<h3>
+  <strong>User:</strong>
+  <%= @order.user %>
+</h3>
+
+<h3>
+  <strong>Quantity:</strong>
+  <%= @order.quantity %>
+</h3>
+
+<h3>
+  <strong>Total:</strong>
+  <%= @order.total %>
+</h3>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>
+</center>

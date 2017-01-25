@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sandwiches</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+    <script src="http://bxslider.com/js/jquery.min.js"></script>
+    <script src="http://bxslider.com/lib/jquery.bxslider.js"></script>
+    <script src="http://bxslider.com/js/rainbow.min.js"></script>
+    <script src="http://bxslider.com/js/scripts.js"></script>
+    <link rel="stylesheet" href="http://bxslider.com/lib/jquery.bxslider.css" type="text/css" />
+    <link rel="stylesheet" href="http://bxslider.com/css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="http://bxslider.com/css/github.css" type="text/css" />
+
+  </head>
+        <style type="text/css">
+          body {
+          background-color: #FFFFFF;
+        }
+          .1 {
+        }
+        .height {
+        }
+         
+        </style>
+        <style>
+        a.one{font-size: 14px;}
+        a.one:link{
+          color: black;
+        }
+        a.one:hover{
+           color: #b30000;   
+        }
+        a.one:visited{
+           color: black;
+        }
+        </style>
+
+  <!-- Configuración de los user -->
+  <body>
+
+    
+  	<div class="container">
+    <!--<p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p> -->
+      <%= render 'layouts/messages' %>    
+        
+      <center>  
+      <div class="container-fluid">
+      <table width="105%" border="0">
+      <tbody>
+        <tr>
+          <th width="136" rowspan="3" scope="col">&nbsp;</th>
+          <th width="159" rowspan="3" scope="row" valign="top"><%= link_to image_tag("dunord.png", :width=>"130", :height=>"150", :alt=>""), root_path%></th>
+          <th width="607" scope="row"><center><%=link_to image_tag("ppalf.jpg", :width=>"350", :height=>"150", :alt=>""), root_path %></center></th>
+          <th width="198" scope="col">&nbsp;</th>
+        </tr>
+        <tr>
+          <th scope="col"><center></center></th>
+        </tr>
+        <tr>
+          <th scope="col"><div class="container-fluid">
+          <center>          
+          
+          <% if current_user %>            
+            <label class="one"> <%= current_user.name %> (Saldo actual: <%= current_user.saldo %>)</label>
+            <%= link_to 'Ordenar', new_order_path, class: "one" %>
+            <% if current_user.admin? %>  
+            <%= link_to 'Panel', admin_root_path, class: "one" %>
+            <% end %> 
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete , class: "one" %>
+          <% else %>
+            <%= link_to 'Login', new_user_session_path, class: "one" %>
+          <% end %>  
+          
+          </center>
+          </div>
+          </th>
+          </tr>
+          <tr>
+           <th width="155" scope="col">&nbsp;</th>
+            <th width="155" scope="col">&nbsp;</th>
+            <th width="155" scope="col">&nbsp;</th>
+          </tr>
+    </tbody>
+  </table>
+  </div>
+  </center>
+
+      
+      <%= yield %>
+      <center>
+      <table width="1213" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+      <tr>
+      </tr>
+      <th width="155" scope="col">&nbsp;</th>
+      <th width="155" scope="col">&nbsp;</th>
+      <th width="155" scope="col">&nbsp;</th>
+        <tr>
+          <th width="190" scope="col">&nbsp;</th>
+          <center><th width="934" scope="col"><%= image_tag "end.jpg", :width=>"934", :height=>"100", :alt=>""%></th></center>
+          <th width="89">&nbsp;</th>
+        </tr>
+        
+      </tbody>
+    </table>
+    </center>
+  	</div>  
+  </body>
+</html>

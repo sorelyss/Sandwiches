@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+body {
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;  
+}
+
+.field {
+  border-radius: 2px 2px 5px 5px;
+  padding: 10px 20px 20px 20px;
+  width: 90%;
+  max-width: 320px;
+  background: #ffffff;
+  position: relative;
+  padding-bottom: 80px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+  color: #000000;
+}
+
+.field input {
+  display: block;
+  padding: 15px 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  transition: border-width 0.2s ease;
+  border-radius: 2px;
+  color: #000000;
+}
+
+.field input:focus {
+  outline: none;
+  color: #444;
+  border-color: #201C3D;
+  border-left-width: 35px;
+}
+
+.field .title {
+  color: #444;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0 30px 0;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.actions input {
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px;
+  background: #201C3D;
+  color: #fff;
+  display: block;
+  border: none;
+  margin-top: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-height: 60px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 2px 2px;
+  transform: rotateZ(0deg);
+  transition: all 0.1s ease-out;
+  border-bottom-width: 7px;
+  font-size:20px;
+}
+</style>  
+<center>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %> <br><br>
+    <div class="field">
+      
+      <p class="title">Registrarse</p>
+      <%= f.text_field :name, placeholder: 'Nombre completo'%>
+      <%= f.number_field :codigo, in: 200000000..299999999, autocomplete: "off", placeholder: 'Código'
+       #f.text_field :codigo, autocomplete: "off", placeholder: 'Código' 
+       %>
+      
+      <%=f.email_field :email, autofocus: true, placeholder: 'Correo Uninorte' %>
+
+      <% if @minimum_password_length %>
+      <% mensaje = " - Mínimo #{@minimum_password_length} caracteres" %> <% end %>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Contraseña #{mensaje}" %>
+      
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Repita la contraseña' %>
+
+      <p class="actions">
+      <%= f.submit "Registrarse" %>
+      </p>
+
+    </div>
+
+<% end %>
+<p></p>
+<%= render "devise/shared/links" %>
+<p></p><p></p><p></p>
+</center>
+</html>

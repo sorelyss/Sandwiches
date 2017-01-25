@@ -1,0 +1,240 @@
+<style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+body {
+  font-family: "Open Sans", sans-serif;
+  height: 100vh;  
+}
+
+
+.actions input {
+  width: 30%;
+  height: 100%;
+  padding: 10px 10px;
+  background: #201C3D;
+  color: #fff;
+  display: block;
+  border: none;
+  margin-top: 20px;
+  left: 0;
+  bottom: 0;
+  max-height: 60px;
+  border: 0px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 2px 2px;
+  transform: rotateZ(0deg);
+  transition: all 0.1s ease-out;
+  border-bottom-width: 7px;
+  font-size:20px;
+ 
+}
+
+</style>  
+<center>
+
+<%= form_for(order) do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <table width="1213" border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr> <td width="155" scope="col">&nbsp;</td></tr>
+            <tr> <td width="155" scope="col">&nbsp;</td></tr>
+            <tr> <td width="155" scope="col">&nbsp;</td></tr>
+             <tr>
+              <td width="155" scope="col">&nbsp;</td>
+              <td width="964" scope="col">
+                  <div class="row" >
+                  <center><h2 style="color:#201C3D;">PANES</h2></center>
+                  <br><br>
+                  <% @ingredients = Ingredient.order(:category_id).all
+                  @ingredients.each do |ingredient| %>
+                  <% @precio = Ingredient.find(ingredient.id).Price %>
+                  <input type="hidden" id="precio_<%=ingredient.id%>" value= <%="#{@precio}" %> />
+                    <% if (ingredient.category_id==4) %>
+                        <div class="col-md-3">
+                        <center>
+                        <h3><%= ingredient.name_Ingredient %></h3><br>
+                        <center><img src="<%= ingredient.imageno.url%>" id="imagePanes_<%=ingredient.id %>"/><br><center>
+                        <center><input type="radio" name="panSelected" id="ingredients__<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados" ></center>
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div>
+                <center>
+                <br><br>
+              <div class="row" > 
+                <center><h2 style="color:#201C3D;">Quesos</h2></center>
+                <br><br>
+                  <% @ingredients = Ingredient.order(:category_id).all
+                  @ingredients.each do |ingredient| %> 
+                  <% @precio = Ingredient.find(ingredient.id).Price %>
+                  <input type="hidden" id="precio_<%=ingredient.id%>" value= <%="#{@precio}" %> />
+                    <% if (ingredient.category_id==5) %>
+                        <div class="col-md-3">
+                         <center>
+                         <h3><%= ingredient.name_Ingredient %></h3><br>
+                         <img src="<%= ingredient.imageno.url%>" id="imagePanes_<%=ingredient.id %>"/><br>
+                         <input type="radio" name="quesoSelected" id="ingredients__<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados" > <br></center>
+                        
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div> </center>
+                <br><br>
+              <div class="row" > 
+                <center><h2 style="color:#201C3D;">Verduras</h2></center>
+                <br><br>
+                  <% @ingredients = Ingredient.order(:category_id).all
+                  @ingredients.each do |ingredient| %> 
+                  <% @precio = Ingredient.find(ingredient.id).Price %>
+                  <input type="hidden" id="precio_<%=ingredient.id%>" value= <%="#{@precio}" %> />
+                    <% if (ingredient.category_id==6) %>
+                        <div class="col-md-3">
+                        <center><h3><%= ingredient.name_Ingredient %></h3>
+                        <img src="<%= ingredient.imageno.url%>" id="imagePanes_<%=ingredient.id %>"/><br>
+                        <input type="checkbox" name="ingredients[]" id="ingredients__<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados"><br></center><br><br>
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <div class="row" > 
+                 <center><h2 style="color:#201C3D;">Salsas</h2></center>
+                <br><br>
+                  <% @ingredients = Ingredient.order(:category_id).all
+                  @ingredients.each do |ingredient| %> 
+                  <% @precio = Ingredient.find(ingredient.id).Price %>
+                  <input type="hidden" id="precio_<%=ingredient.id%>" value= <%="#{@precio}" %> />
+                    <% if (ingredient.category_id==7) %>
+                        <div class="col-md-3">
+                        <center><h3><%= ingredient.name_Ingredient %></h3>
+                        <img src="<%= ingredient.imageno.url%>" id="imagePanes_<%=ingredient.id %>" size="80x80"/><br>
+                        <input type="checkbox" name="ingredients[]" id="ingredients__<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados"><br></center><br><br>
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <div class="row" > 
+                 <center><h2 style="color:#201C3D;">Aderezos</h2></center>
+                <br><br>
+                  <% @ingredients = Ingredient.order(:category_id).all
+                  @ingredients.each do |ingredient| %> 
+                  <% @precio = Ingredient.find(ingredient.id).Price %>
+                  <input type="hidden" id="precio_<%=ingredient.id%>" value= <%="#{@precio}" %> />
+                    <% if (ingredient.category_id==8) %>
+                        <div class="col-md-3">
+                        <center><h3><%= ingredient.name_Ingredient %></h3>
+                        <img src="<%= ingredient.imageno.url%>" id="imagePanes_<%=ingredient.id %>" size="80x80"/><br>
+                        <input type="checkbox" name="ingredients[]" id="ingredients__<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados"><br></center><br><br>
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <div class="row" > 
+                 <center><h2 style="color:#201C3D;">Extras</h2></center>
+                <br><br>
+                  <% @ingredients = Ingredient.order(:category_id).all
+                  @ingredients.each do |ingredient| %> 
+                  <% @precio = Ingredient.find(ingredient.id).Price %>
+                  <input type="hidden" id="precio_<%=ingredient.id%>" value= <%="#{@precio}" %> />
+                    <% if (ingredient.category_id==9) %>
+                        <div class="col-md-3">
+                        <center><h3><%= ingredient.name_Ingredient %></h3>
+                        <img src="<%= ingredient.imageno.url%>" id="imagePanes_<%=ingredient.id %>"/><br>
+                        <input type="checkbox" name="ingredients[]" id="ingredients__<%=ingredient.id %>" value="<%= ingredient.id%>" class="seleccionados"><br></center><br>
+                        </div>
+                    <% end %>
+                  <% end %>
+                </div>
+
+              </td>
+              <td width="89">&nbsp;</td>
+            </tr>
+            <tr> <td width="155" scope="col">&nbsp;</td></tr>
+            <tr> <td width="155" scope="col">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  
+  
+
+  <div class="field">
+    <%= f.label :hour %>
+    <%= f.time_field :hour, :class => "form-control", value: "#{DateTime.now.strftime("%H:%M")}", min:"#{DateTime.now.strftime("%H:%M")}"%>
+  </div>
+
+  <div class="field">
+    <%= f.label :comments %>
+    <%= f.text_area :comments, :class => "form-control", :placeholder => "Ingrese comentario"%>
+  </div>
+
+  <div class="field">
+  <% if current_user %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% end %>  
+  </div>
+
+  <div class="field">
+  
+    <% tipoSand = Ingredient.find(tipo)
+    @tam = 15
+    if tipoSand.name_Ingredient.include? "15"
+      @tam = 15
+    else
+      @tam = 30
+    end %>
+  <input type="hidden" id="precio_Tipo" value= <%="#{tipoSand.Price}" %> />
+    <%= f.hidden_field :tamaño, :value => @tam %>
+    <%= f.hidden_field :tipo, :value => tipo %>
+  </div>
+
+   <div class="field">
+    <label>Cantidad: </label>
+    <%= f.number_field :quantity, :class => "seleccionados"%>
+  </div>
+
+   <div class="field">
+    <label>Total: </label> <input placeholder="Seleccione un ingrediente" type="number" value="" name="order[total]" id="order_total" readonly>
+    <br>
+    <label id="mensaje"></label>
+  </div>
+
+ <center>
+  <div class="actions" >
+  <% if current_user %>
+    <%= f.submit :id => "order_submit" %>
+  <% end %>  
+  </div></center>
+      <script type="text/javascript">
+      $('.seleccionados').bind('click', function() {
+        var chequeados, costo
+        chequeados = "";
+        costo = 0;
+        $("input.seleccionados:checked").each(function(){            
+          chequeados = chequeados +" "+ $(this).val();
+          costo = costo + parseInt(document.getElementById("precio_"+$(this).val()).value);
+        });
+        costo = costo + parseInt(document.getElementById("precio_Tipo").value);
+        costo = costo * parseInt(document.getElementById("order_quantity").value);
+        if (<%= current_user.saldo%> < costo ) {
+        //alert("No tienes saldo suficiente");
+        document.getElementById("order_submit").hidden=true;
+        document.getElementById("mensaje").innerHTML = "No tiene saldo suficiente para realizar esta compra";
+        }
+        else{document.getElementById("order_submit").hidden=false;
+        document.getElementById("mensaje").innerHTML = "";
+        }
+        document.getElementById("order_total").value = ""+costo;
+        return true;
+      });
+    </script>
+
+<% end %>
+</center>
